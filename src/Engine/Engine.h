@@ -5,15 +5,16 @@
  *      Author: ludkiller
  */
 
-#ifndef _ENGINE_H_
-#define _ENGINE_H_
+#ifndef _ENGINE_H
+#define _ENGINE_H
 
+static SDL_Window *win;
+static SDL_Renderer *ren;
 int initSDL(void);
 int loadMap(void);
 
 
-
-#endif /* _ENGINE_H_ */
+#endif /* _ENGINE_H */
 
 
 
