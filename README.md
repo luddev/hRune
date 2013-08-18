@@ -4,17 +4,16 @@ hRune
 A 2-D Side Scroller
 
 
-TODO:                                        Status
+TODO:
 
 
-=> Add Game Engine.                         [ X ]  
-=> Add Graphics Rendering function.         [ X ]  
-=> Add Player Character.                    [ X ]   
-=> Implement a Tiling System.               [   ]  
-=> Add Comments.                            [   ]  
-=> Fix Sprite Sheets.                       [   ]  
-=> Add more to TODO.                        [   ]  
-
+[x] Add Game Engine.  
+[x] Add Graphics Rendering function.  
+[x] Add Player Character.   
+[ ] Implement a Tiling System.  
+[ ] Add Comments.  
+[ ] Fix Sprite Sheets.  
+[ ] Add more to TODO.  
 
 
 
