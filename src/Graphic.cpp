@@ -16,8 +16,8 @@ Graphic::Graphic()
 	
 	mWindow.w = 800;
 	mWindow.h = 600;
-	mWindow.x = 20;
-	mWindow.y = 20;
+	mWindow.x = 40;
+	mWindow.y = 40;
 
 }
 
