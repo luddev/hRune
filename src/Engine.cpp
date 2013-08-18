@@ -59,7 +59,7 @@ void Engine::Quit()
 
 void Engine::setupStage1()
 {
-	setClip(&gfx);
+	gfx.renderScene();
 	std::cout<<"Clipping done!\n"<<std::endl;
 	
 	//gfx.renderScene();

@@ -42,13 +42,16 @@ SDL_Texture* Graphic::loadImage(std::string file)
 	return texture;
 }
 
-void Graphic::textureAtPos(SDL_Texture *texture, int x, int y, SDL_Rect *clip)
+void Graphic::textureAtPos(SDL_Texture *texture, int x, int y, SDL_Rect *clip = nullptr)
 {
 	SDL_Rect pos;
 	pos.x = x;
 	pos.y = y;
 	//SDL_QueryTexture(texture,NULL,NULL,&pos.w,&pos.h);
+	pos.w = TILE_WIDTH;
+	pos.h = TILE_HEIGHT;
 	SDL_RenderCopy(renderer,texture,clip,&pos);
+	
 
 }
 
@@ -66,39 +69,28 @@ void setClip(Graphic *gfx)
 	clip[TILE_RED].y = 0;
 	clip[TILE_RED].w = TILE_WIDTH;
 	clip[TILE_RED].h = TILE_HEIGHT;
-	clip[TILE_BLUE].x = 0;
-	clip[TILE_BLUE].y = 80;
-	clip[TILE_BLUE].w = TILE_WIDTH;
-	clip[TILE_BLUE].h = TILE_HEIGHT;
-	SDL_Texture *red_t,*blue_t,*tilesheet;
-	red_t = blue_t = tilesheet = nullptr;
+	clip[TILE_GREEN].x = 80;
+	clip[TILE_GREEN].y = 80;
+	clip[TILE_GREEN].w = TILE_WIDTH;
+	clip[TILE_GREEN].h = TILE_HEIGHT;
+	SDL_Texture *tilesheet;
+	tilesheet = nullptr;
 	tilesheet = gfx->loadImage("tiles.bmp");
-	gfx->textureAtPos(tilesheet,40,40,&clip[0]);
-	gfx->textureAtPos(tilesheet,50,50,&clip[1]);
+	//gfx->textureAtPos(tilesheet,40,40,&clip[0]);
+
+	gfx->textureAtPos(tilesheet,100,100,&clip[1]);
 	SDL_RenderPresent(gfx->renderer);
+	
 }
 
 void Graphic::renderScene()
 {
 	SDL_RenderClear(renderer);
-	SDL_Texture *tex = nullptr;
-	try 
-	{
-		tex = loadImage("background.bmp");
-		tex = nullptr;
-		tex = loadImage("tiles.bmp");
-	}
-	catch (const std::runtime_error &e)
-	{
-		std::cout << e.what() << std::endl;
-		Engine::Quit();
-		return;
-	}
-
+	setClip(this);
 	//Add Rendering Code Here.
 	//textureAtPos(tex,40,40,clip[0]);
 
 	SDL_RenderPresent(renderer);
-	SDL_DestroyTexture(tex);
+	
 }
 

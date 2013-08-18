@@ -6,8 +6,8 @@
 #define TOTAL_TILE_LELVEL_1 100
 
 #define TILE_RED 0
-#define TILE_BLUE 1
-#define TILE_GREEN 2
+#define TILE_GREEN 1
+#define TILE_BLUE 2
 #define TILE_WIDTH 40
 #define TILE_HEIGHT 40
 
