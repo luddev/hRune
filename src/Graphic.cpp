@@ -3,6 +3,7 @@
 #include"SDL_image.h"
 #include<iostream>
 #include<string>
+#include<stdexcept>
 //User Includes
 #include"Graphic.h"
 #include"Engine.h"

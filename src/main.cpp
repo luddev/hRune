@@ -3,6 +3,7 @@
 #include"SDL_image.h"
 #include<iostream>
 #include<string>
+#include<stdexcept>
 //User Includes
 //Order of inclusion matters ;) please dont tweak with it
 //always keep Graphic above engine
