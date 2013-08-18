@@ -7,7 +7,7 @@
 #include"Graphic.h"
 #include"Engine.h"
 
-SDL_Rect clip[2];
+SDL_Rect clip[3];
 
 Graphic::Graphic()
 {
@@ -64,23 +64,38 @@ void Graphic::tileAtPos(SDL_Rect *box, int type)
 
 void setClip(Graphic *gfx)
 {
-
+	//RED TILE
 	clip[TILE_RED].x = 0;
 	clip[TILE_RED].y = 0;
 	clip[TILE_RED].w = TILE_WIDTH;
 	clip[TILE_RED].h = TILE_HEIGHT;
-	clip[TILE_GREEN].x = 80;
+	//GREEN TILE
+	clip[TILE_GREEN].x = 0;
 	clip[TILE_GREEN].y = 80;
 	clip[TILE_GREEN].w = TILE_WIDTH;
 	clip[TILE_GREEN].h = TILE_HEIGHT;
+	//BLUE TILE
+	clip[TILE_BLUE].x = 0;
+	clip[TILE_BLUE].y = 160;
+	clip[TILE_BLUE].w = TILE_WIDTH;
+	clip[TILE_BLUE].h = TILE_HEIGHT;
+	
+	//Load Tile Sheet
+
 	SDL_Texture *tilesheet;
 	tilesheet = nullptr;
 	tilesheet = gfx->loadImage("tiles.bmp");
-	//gfx->textureAtPos(tilesheet,40,40,&clip[0]);
-
-	gfx->textureAtPos(tilesheet,100,100,&clip[1]);
-	SDL_RenderPresent(gfx->renderer);
 	
+	//Place tile sheets
+
+	gfx->textureAtPos(tilesheet,40,40,&clip[TILE_RED]);
+	gfx->textureAtPos(tilesheet,40,60,&clip[TILE_RED]);
+
+	gfx->textureAtPos(tilesheet,180,40,&clip[TILE_GREEN]);
+	gfx->textureAtPos(tilesheet,180,60,&clip[TILE_GREEN]);
+	
+	gfx->textureAtPos(tilesheet,160,0,&clip[TILE_BLUE]);
+
 }
 
 void Graphic::renderScene()
@@ -89,8 +104,14 @@ void Graphic::renderScene()
 	setClip(this);
 	//Add Rendering Code Here.
 	//textureAtPos(tex,40,40,clip[0]);
-
+	//Render :) Pew pew pew!
 	SDL_RenderPresent(renderer);
 	
+}
+
+void Graphic::loadLevel1()
+{
+	//Level 1 texture at pos code in here ;)
+
 }
 

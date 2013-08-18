@@ -8,8 +8,8 @@
 #define TILE_RED 0
 #define TILE_GREEN 1
 #define TILE_BLUE 2
-#define TILE_WIDTH 40
-#define TILE_HEIGHT 40
+#define TILE_WIDTH 80
+#define TILE_HEIGHT 80
 
 
 
@@ -20,6 +20,7 @@ public:
 	void textureAtPos(SDL_Texture* texture, int x, int y,SDL_Rect *clip);
 	void tileAtPos(SDL_Rect *box, int type);
 	void renderScene();
+	void loadLevel1();
 	Graphic();
 
 	SDL_Window* window;
