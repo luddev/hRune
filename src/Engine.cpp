@@ -4,7 +4,6 @@
 #include<iostream>
 #include<stdlib.h>
 #include<string>
-#include<stdexcept>
 //User Includes
 #include"Graphic.h"
 #include"Engine.h"

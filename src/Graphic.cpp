@@ -3,7 +3,6 @@
 #include"SDL_image.h"
 #include<iostream>
 #include<string>
-#include<stdexcept>
 //User Includes
 #include"Graphic.h"
 #include"Engine.h"
@@ -85,7 +84,7 @@ void setClip(Graphic *gfx)
 
 	SDL_Texture *tilesheet;
 	tilesheet = nullptr;
-	tilesheet = gfx->loadImage("tiles.bmp");
+	tilesheet = gfx->loadImage("../res/tiles.png");
 	
 	//Place tile sheets
 

@@ -18,7 +18,7 @@ Character::Character(Engine *eng, int x, int y)
 	yVel = 0;
 	friction = 0.9;
 
-	player = eng->gfx.loadImage("player_t.png");
+	player = eng->gfx.loadImage("../res/player_t.png");
 	play_t.x = CHARACTER_STAND_X;
 	play_t.y = CHARACTER_STAND_Y;
 	play_t.w = CHARACTER_W;
@@ -37,6 +37,7 @@ void Character::handleInput(int i)
 			switch(event.key.keysym.sym)
 			{
 				case SDLK_w:
+
 					break;
 				case SDLK_s:
 
@@ -48,6 +49,7 @@ void Character::handleInput(int i)
 					box.y += yVel;
 					break;
 				case SDLK_a:
+
 					break;
 			}
 
