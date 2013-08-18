@@ -13,6 +13,14 @@ Character::Character(Engine *eng, int x, int y)
 	engine = eng; 
 	box.x = x;
 	box.y = y;
+	player = eng->gfx.loadImage("player_t.png");
+	play_t.x = 33;
+	play_t.y = 1;
+	play_t.w = CHARACTER_WIDTH;
+	play_t.h = CHARACTER_HEIGHT;
+	eng->gfx.textureAtPos(player, box.x, box.y , &play_t);
+	std::cout<<"Character Init !"<<std::endl;
+	eng->gfx.renderScene();
 }
 
 void Character::handleInput()

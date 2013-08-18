@@ -59,6 +59,7 @@ void Engine::Quit()
 
 void Engine::setupStage1()
 {
+	SDL_RenderClear(gfx.renderer);
 	gfx.renderScene();
 	std::cout<<"Clipping done!\n"<<std::endl;
 	

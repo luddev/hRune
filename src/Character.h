@@ -2,6 +2,8 @@
 #ifndef _CHARACTER_H
 #define _CHARACTER_H
 
+const int CHARACTER_HEIGHT = 32;
+const int CHARACTER_WIDTH = 29;
 
 class Character
 {
@@ -14,9 +16,10 @@ public:
 
 
 private:
-	SDL_Rect box;
+	SDL_Rect box,play_t;
 	int xVel,yVel;
 	SDL_Event event;
+	SDL_Texture *player;
 	Engine *engine;
 
 };

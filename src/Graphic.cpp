@@ -16,8 +16,8 @@ Graphic::Graphic()
 	
 	mWindow.w = 800;
 	mWindow.h = 600;
-	mWindow.x = 40;
-	mWindow.y = 40;
+	mWindow.x = 20;
+	mWindow.y = 20;
 
 }
 
@@ -25,7 +25,7 @@ SDL_Texture* Graphic::loadImage(std::string file)
 {
 	SDL_Surface *image = nullptr;
 	SDL_Texture *texture = nullptr;
-	image = SDL_LoadBMP(file.c_str());
+	image = IMG_Load(file.c_str());
 	if(image == nullptr)
 	{
 		throw std::runtime_error("Unable to locate image " + file);
@@ -88,19 +88,18 @@ void setClip(Graphic *gfx)
 	
 	//Place tile sheets
 
-	gfx->textureAtPos(tilesheet,40,40,&clip[TILE_RED]);
-	gfx->textureAtPos(tilesheet,40,60,&clip[TILE_RED]);
+	for (int i=0 ; i < 20 ; i++)
+	{
+		gfx->textureAtPos(tilesheet,(10*i+20),20,&clip[TILE_RED]);
 
-	gfx->textureAtPos(tilesheet,180,40,&clip[TILE_GREEN]);
-	gfx->textureAtPos(tilesheet,180,60,&clip[TILE_GREEN]);
+		gfx->textureAtPos(tilesheet,(10*i+40),60,&clip[TILE_GREEN]);
 	
-	gfx->textureAtPos(tilesheet,160,0,&clip[TILE_BLUE]);
-
+		gfx->textureAtPos(tilesheet,(10*i+70),100,&clip[TILE_BLUE]);
+	}
 }
 
 void Graphic::renderScene()
 {
-	SDL_RenderClear(renderer);
 	setClip(this);
 	//Add Rendering Code Here.
 	//textureAtPos(tex,40,40,clip[0]);

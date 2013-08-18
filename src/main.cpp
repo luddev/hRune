@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 {
 	Engine engine;
 
-	Character player(&engine,320,240);
+	
 	try 
 	{
 		engine.sdlinit("Engine");
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		Engine::Quit();
 		return -1;
 	}
-	
+	Character player(&engine,320,240);	//Player spawn coordinates for now
 	while(1)
 	{
 	
