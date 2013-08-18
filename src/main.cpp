@@ -16,7 +16,7 @@
 int main(int argc, char **argv)
 {
 	Engine engine;
-
+	int i=0;
 	
 	try 
 	{
@@ -33,8 +33,11 @@ int main(int argc, char **argv)
 	Character player(&engine,320,240);	//Player spawn coordinates for now
 	while(1)
 	{
-	
-	player.handleInput();
+	i++;
+	if(i==5)
+		i=1;
+	player.handleInput(i);
+
 	
 	}
 	SDL_Delay(2000);

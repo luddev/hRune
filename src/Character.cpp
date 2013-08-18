@@ -13,17 +13,22 @@ Character::Character(Engine *eng, int x, int y)
 	engine = eng; 
 	box.x = x;
 	box.y = y;
+
+	xVel = 5;
+	yVel = 0;
+	friction = 0.9;
+
 	player = eng->gfx.loadImage("player_t.png");
-	play_t.x = 33;
-	play_t.y = 1;
-	play_t.w = CHARACTER_WIDTH;
-	play_t.h = CHARACTER_HEIGHT;
+	play_t.x = CHARACTER_STAND_X;
+	play_t.y = CHARACTER_STAND_Y;
+	play_t.w = CHARACTER_W;
+	play_t.h = CHARACTER_H;
 	eng->gfx.textureAtPos(player, box.x, box.y , &play_t);
 	std::cout<<"Character Init !"<<std::endl;
 	eng->gfx.renderScene();
 }
 
-void Character::handleInput()
+void Character::handleInput(int i)
 {
 	if(SDL_PollEvent(&event))
 	{
@@ -34,8 +39,13 @@ void Character::handleInput()
 				case SDLK_w:
 					break;
 				case SDLK_s:
+
 					break;
 				case SDLK_d:
+					play_t.x = CHARACTER_RUN_X * i;
+					play_t.y = CHARACTER_RUN_Y;
+					box.x += xVel * i;
+					box.y += yVel;
 					break;
 				case SDLK_a:
 					break;
@@ -46,6 +56,16 @@ void Character::handleInput()
 		{
 			engine->Quit();
 		}
+		else
+		{
+			play_t.x = CHARACTER_STAND_X;
+			play_t.y = CHARACTER_STAND_Y;
+			//xVel = xVel * friction; // Too much friction can't move fix this.
+			yVel = yVel * friction;
+
+		}
+		engine->gfx.textureAtPos(player, box.x, box.y , &play_t);
+		engine->gfx.renderScene();
 	}
 
 }

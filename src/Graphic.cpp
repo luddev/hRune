@@ -100,11 +100,13 @@ void setClip(Graphic *gfx)
 
 void Graphic::renderScene()
 {
+	
 	setClip(this);
 	//Add Rendering Code Here.
 	//textureAtPos(tex,40,40,clip[0]);
 	//Render :) Pew pew pew!
 	SDL_RenderPresent(renderer);
+	SDL_RenderClear(renderer);
 	
 }
 
