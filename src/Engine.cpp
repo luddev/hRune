@@ -1,5 +1,6 @@
 //SDL Required
 #include"SDL.h"
+#include"SDL_image.h"
 #include<iostream>
 #include<stdlib.h>
 #include<string>
@@ -8,7 +9,10 @@
 #include"Engine.h"
 
 
+
+
 Graphic Engine::gfx = Graphic();
+
 Engine::Engine()
 {
 
@@ -55,8 +59,11 @@ void Engine::Quit()
 
 void Engine::setupStage1()
 {
-	setClip();
+	setClip(&gfx);
 	std::cout<<"Clipping done!\n"<<std::endl;
+	
+	//gfx.renderScene();
+
 }
 
 void Engine::setupStage2()

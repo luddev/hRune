@@ -16,8 +16,6 @@ public:
 	void setupStage1();
 	void setupStage2();
 
-	SDL_Texture* loadImage(std::string file,SDL_Renderer *renderer);
-	void textureAtPos( SDL_Renderer *renderer, SDL_Texture* texture, int x, int y);
 
 
 	Engine();

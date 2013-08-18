@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include"SDL.h"
+#include"SDL_image.h"
 #include"Graphic.h"
 #include"Engine.h"
 #include"Character.h"

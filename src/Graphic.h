@@ -8,17 +8,17 @@
 #define TILE_RED 0
 #define TILE_BLUE 1
 #define TILE_GREEN 2
-#define TILE_WIDTH 80
-#define TILE_HEIGHT 80
+#define TILE_WIDTH 40
+#define TILE_HEIGHT 40
 
-void setClip();
+
 
 class Graphic
 {
 public:
-	SDL_Texture* loadImage(std::string file,SDL_Renderer *renderer);
-	void textureAtPos( SDL_Renderer *renderer, SDL_Texture* texture, int x, int y);
-	void tileAtPos(SDL_Renderer *renderer, SDL_Rect *box, int type);
+	SDL_Texture* loadImage(std::string file);
+	void textureAtPos(SDL_Texture* texture, int x, int y,SDL_Rect *clip);
+	void tileAtPos(SDL_Rect *box, int type);
 	void renderScene();
 	Graphic();
 
@@ -29,4 +29,7 @@ public:
 
 
 };
+
+void setClip(Graphic *gfx);
+
 #endif /* _GRAPHIC_H */
