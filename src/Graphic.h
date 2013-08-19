@@ -8,8 +8,8 @@
 #define TILE_RED 0
 #define TILE_GREEN 1
 #define TILE_BLUE 2
-#define TILE_WIDTH 80
-#define TILE_HEIGHT 80
+#define TILE_WIDTH 60
+#define TILE_HEIGHT 60
 
 
 
@@ -21,10 +21,14 @@ public:
 	void tileAtPos(SDL_Rect *box, int type);
 	void renderScene();
 	void loadLevel1();
+	void setBlendMode(SDL_Texture *texture, SDL_BlendMode blending);
+	void setAlpha(SDL_Texture *texture, Uint8 alpha);
+	void flipTexture(SDL_Texture* texture, SDL_Rect *player,SDL_Rect *box, double angle);
 	Graphic();
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	//SDL_Surface *screenSurface; Old
 	SDL_Rect mWindow;
 
 

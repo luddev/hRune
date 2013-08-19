@@ -31,12 +31,14 @@ int main(int argc, char **argv)
 		return -1;
 	}
 	Character player(&engine,320,240);	//Player spawn coordinates for now
+	
 	while(1)
 	{
 	i++;
-	if(i==5)
+	if(i >= 4)
 		i=1;
 	player.handleInput(i);
+	//engine.gfx.renderScene();
 
 	
 	}

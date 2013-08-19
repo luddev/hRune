@@ -3,6 +3,9 @@
 #ifndef _ENGINE_H
 #define _ENGINE_H
 
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
+
 
 class Engine
 {

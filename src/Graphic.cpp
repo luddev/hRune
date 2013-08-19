@@ -14,8 +14,8 @@ Graphic::Graphic()
 	window = nullptr;
 	renderer = nullptr;
 	
-	mWindow.w = 800;
-	mWindow.h = 600;
+	mWindow.w = SCREEN_WIDTH;
+	mWindow.h = SCREEN_HEIGHT;
 	mWindow.x = 20;
 	mWindow.y = 20;
 
@@ -116,3 +116,21 @@ void Graphic::loadLevel1()
 
 }
 
+
+void Graphic::setBlendMode( SDL_Texture *texture, SDL_BlendMode blending )
+{
+	//Set blending function
+	SDL_SetTextureBlendMode( texture, blending );
+}
+		
+void Graphic::setAlpha(SDL_Texture *texture, Uint8 alpha )
+{
+	//Modulate texture alpha
+	SDL_SetTextureAlphaMod( texture, alpha );
+}
+
+void Graphic::flipTexture(SDL_Texture* texture, SDL_Rect *player , SDL_Rect *box, double angle)
+{
+	SDL_RenderCopyEx(renderer,texture,player,box,angle,NULL,SDL_FLIP_HORIZONTAL);
+
+}

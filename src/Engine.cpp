@@ -41,6 +41,9 @@ void Engine::sdlinit(std::string title)
 	{
 		throw std::runtime_error("SDL Create Renderer Failed\n");
 	}
+
+	// Old Renderer is better ;)
+	//gfx.screenSurface = SDL_GetWindowSurface(gfx.window);  
 	
 	std::cout<<"Renderer Init()"<<std::endl;
 
@@ -59,6 +62,14 @@ void Engine::Quit()
 
 void Engine::setupStage1()
 {
+	SDL_Rect topLeftViewport;
+	topLeftViewport.x = 0;
+	topLeftViewport.y = 0;
+	topLeftViewport.w = SCREEN_WIDTH;
+	topLeftViewport.h = SCREEN_HEIGHT;
+	SDL_RenderSetViewport( gfx.renderer, &topLeftViewport );
+	SDL_RenderSetScale( gfx.renderer, 1.f, 1.f );
+	SDL_SetRenderDrawColor( gfx.renderer, 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_RenderClear(gfx.renderer);
 	gfx.renderScene();
 	std::cout<<"Clipping done!\n"<<std::endl;

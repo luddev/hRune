@@ -2,8 +2,8 @@ SHELL := /bin/bash
 CC := x86_64-w64-mingw32-gcc
 CXX := x86_64-w64-mingw32-g++
 
-CFLAGS := -Wall -Werror -std=c11 -pedantic -ggdb `x86_64-w64-mingw32-pkg-config --cflags sdl2`
-CXXFLAGS := -Wall -Werror -std=c++11 -pedantic -ggdb `x86_64-w64-mingw32-pkg-config --cflags sdl2`
+CFLAGS := -Wall -std=c11 -pedantic -ggdb `x86_64-w64-mingw32-pkg-config --cflags sdl2`
+CXXFLAGS := -Wall -std=c++11 -pedantic -ggdb `x86_64-w64-mingw32-pkg-config --cflags sdl2`
 LFLAGS := `x86_64-w64-mingw32-pkg-config --libs sdl2` -lSDL2_image
 
 OBJ := obj/windows/

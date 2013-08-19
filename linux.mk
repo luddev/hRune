@@ -2,8 +2,8 @@ SHELL := /bin/bash
 CC := gcc
 CXX := g++
 
-CFLAGS := -Wall -Werror -std=c11 -pedantic -ggdb `pkg-config --cflags sdl2`
-CXXFLAGS := -Wall -Werror -std=c++11 -pedantic -ggdb `pkg-config --cflags sdl2`
+CFLAGS := -Wall -std=c11 -pedantic -ggdb `pkg-config --cflags sdl2`
+CXXFLAGS := -Wall -std=c++11 -pedantic -ggdb `pkg-config --cflags sdl2`
 LFLAGS := `pkg-config --libs sdl2` -lSDL2_image
 
 OBJ := obj/linux/
