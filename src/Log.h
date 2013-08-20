@@ -39,4 +39,5 @@ public:
 	static void Warning(const char * msg, ...);
 };
 
+char *getTime();
 #endif /* LOG_H_ */

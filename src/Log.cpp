@@ -17,13 +17,13 @@ static char buf[80];
 static FILE * fp = NULL;
 
 // Gets the time and date and formats it to a char *
-static char * getTime() {
+char * getTime() {
 	time_t rawtime;
 	struct tm * timeinfo;
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
 
-	strftime(buf, 80, "%Ex - %EX", timeinfo);
+	strftime(buf, 80, "[%x] [%X]", timeinfo);
 	return buf;
 }
 

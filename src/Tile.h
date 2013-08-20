@@ -11,9 +11,8 @@ public:
 
 	Tile(int x, int y, int type);
 	void showTile();
-	int getType();
-	SDL_Rect getBox();
-
+	int getType() const;
+	SDL_Rect getBox() const;
 private:
 
 	SDL_Rect box;
@@ -21,5 +20,6 @@ private:
 	int type;
 
 };
+
 
 #endif /* _TILE_H*/

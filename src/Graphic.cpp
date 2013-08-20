@@ -4,10 +4,14 @@
 #include<iostream>
 #include<string>
 //User Includes
+#include"Tile.h"
+#include"Timer.h"
 #include"Graphic.h"
 #include"Engine.h"
+#include"Log.h"
 
 SDL_Rect clip[3];
+
 
 Graphic::Graphic()
 {
@@ -18,6 +22,10 @@ Graphic::Graphic()
 	mWindow.h = SCREEN_HEIGHT;
 	mWindow.x = 20;
 	mWindow.y = 20;
+	camera.x = 0;
+	camera.y = 0;
+	camera.w = SCREEN_WIDTH;
+	camera.h = SCREEN_HEIGHT;
 
 }
 
@@ -28,13 +36,15 @@ SDL_Texture* Graphic::loadImage(std::string file)
 	image = IMG_Load(file.c_str());
 	if(image == nullptr)
 	{
+		Log::Warning("Unable to locate image %s",file);
 		throw std::runtime_error("Unable to locate image " + file);
 	}
 
 	texture = SDL_CreateTextureFromSurface(renderer,image);
 	if(texture == nullptr)
 	{
-		std::cout<<SDL_GetError()<<std::endl;
+		Log::Warning("Failed Creating Texture From Surface \nError : %s",SDL_GetError());
+		//std::cout<<SDL_GetError()<<std::endl;
 		throw std::runtime_error("Failed Creating Texture from surface\n");
 
 	}
@@ -42,7 +52,7 @@ SDL_Texture* Graphic::loadImage(std::string file)
 	return texture;
 }
 
-void Graphic::textureAtPos(SDL_Texture *texture, int x, int y, SDL_Rect *clip = nullptr)
+void Graphic::textureAtPos(SDL_Texture *texture, int x, int y, const SDL_Rect *clip)
 {
 	SDL_Rect pos;
 	pos.x = x;
@@ -55,10 +65,10 @@ void Graphic::textureAtPos(SDL_Texture *texture, int x, int y, SDL_Rect *clip = 
 
 }
 
-void Graphic::tileAtPos(SDL_Rect *box, int type)
+void Graphic::tileAtPos(SDL_Texture *texture,const SDL_Rect *box, int type)
 {
-	
 
+	SDL_RenderCopy(renderer, texture, &clip[type], box);
 
 }
 
@@ -82,25 +92,13 @@ void setClip(Graphic *gfx)
 	
 	//Load Tile Sheet
 
-	SDL_Texture *tilesheet;
-	tilesheet = nullptr;
-	tilesheet = gfx->loadImage("../res/tiles.png");
 	
-	//Place tile sheets
-
-	for (int i=0 ; i < 20 ; i++)
-	{
-		gfx->textureAtPos(tilesheet,(10*i+20),20,&clip[TILE_RED]);
-
-		gfx->textureAtPos(tilesheet,(10*i+40),60,&clip[TILE_GREEN]);
-	
-		gfx->textureAtPos(tilesheet,(10*i+70),100,&clip[TILE_BLUE]);
-	}
 }
 
 void Graphic::renderScene()
 {
-	
+
+
 	setClip(this);
 	//Add Rendering Code Here.
 	//textureAtPos(tex,40,40,clip[0]);
@@ -110,11 +108,7 @@ void Graphic::renderScene()
 	
 }
 
-void Graphic::loadLevel1()
-{
-	//Level 1 texture at pos code in here ;)
 
-}
 
 
 void Graphic::setBlendMode( SDL_Texture *texture, SDL_BlendMode blending )
@@ -127,10 +121,16 @@ void Graphic::setAlpha(SDL_Texture *texture, Uint8 alpha )
 {
 	//Modulate texture alpha
 	SDL_SetTextureAlphaMod( texture, alpha );
+	Log::Info("Alpha Blending\n");
 }
 
-void Graphic::flipTexture(SDL_Texture* texture, SDL_Rect *player , SDL_Rect *box, double angle)
+void Graphic::flipTexture(SDL_Texture* texture, const SDL_Rect *player , const SDL_Rect *box, double angle)
 {
 	SDL_RenderCopyEx(renderer,texture,player,box,angle,NULL,SDL_FLIP_HORIZONTAL);
 
+}
+
+void Graphic::loadSprites()
+{
+	tilesheet = loadImage("../res/tiles.png");
 }

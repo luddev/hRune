@@ -22,10 +22,10 @@ class Character
 {
 public:
 	Character(Engine *eng, int x, int y);
-	void handleInput(int i);
+	void handleInput(int i, Tile *tilex[]);
 	void showHero();
-	void move();
 	void setCamera();
+	void checkCollision();
 	~Character();
 
 

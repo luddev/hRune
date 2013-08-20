@@ -18,14 +18,18 @@ public:
 	void removeStageProps();
 	void setupStage1();
 	void setupStage2();
-
-
+	void loadLevel1(Tile *tilex[]);
+	void destroyTiles(Tile *tilex[]);
 
 	Engine();
 	//Variables
 	static Graphic gfx;
+	static Timer timer;
+private:
+	bool loadedTiles;
 
 };
+
 
 
 
