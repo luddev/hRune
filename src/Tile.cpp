@@ -4,6 +4,7 @@
 #include"SDL_image.h"
 #include"Tile.h"
 #include"Timer.h"
+#include"Level.h"
 #include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"

@@ -3,11 +3,13 @@
 #include"SDL.h"
 #include"SDL_image.h"
 #include"Tile.h"
+#include"Level.h"
 #include"Timer.h"
 #include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"
 #include"Log.h"
+
 //#include"Stdincl.h"
 
 Character::Character(int x, int y)
@@ -137,19 +139,3 @@ void Character::animatePlayer(int status, int seedAnim, int keypressed)
     box.x += speedX;
     box.y += speedY;
 }
-
-/*
-void Character::showHero()
-{
-	if(isFlip == false)
-	{
-		engine->gfx.textureAtPos(player, box.x, box.y , &play_t);
-	}
-	else
-	{
-			//flipping code here
-			engine->gfx.flipTexture(player,&play_t,&box,degree);
-	}
-	engine->gfx.renderScene();
-}
-*/

@@ -10,7 +10,7 @@ const int CHARACTER_STAND_X = 33;	//Character X coordinate in sprite Action : ST
 const int CHARACTER_STAND_Y = 1;	//Character Y coordinate in sprite Action : STAND
 
 
-//Multiply the x coordinate by 2 to get other run sprite max by 4
+//Multiply the x coordinate by 1,2,3,4 to get other run sprite max by 4
 
 const int CHARACTER_RUN_X = 31;		//Character X coordinate in sprite Action : RUN 
 const int CHARACTER_RUN_Y = 79;		//Character Y coordinate in sprite Action : RUN
@@ -18,12 +18,12 @@ const int CHARACTER_RUN_Y = 79;		//Character Y coordinate in sprite Action : RUN
 const int CHARACTER_JUMP_X = 255;
 const int CHARACTER_JUMP_Y = 0;
 
-typedef enum {
+enum characterStatus {
     CHARACTER_STAND = 0,
     CHARACTER_RUN,
     CHARACTER_JUMP,
     CHARACTER_DIE
-} characterStatus;
+};
 
 class Character
 {
@@ -53,7 +53,7 @@ private:
 	int speedX,speedY;
 	int acclX,acclY;
 	double degree;
-	float friction;
+	double friction;
 	//SDL_Texture *player;
 	SDL_BlendMode blendin;
 	bool isFlip;

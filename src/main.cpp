@@ -8,6 +8,7 @@
 //always keep Graphic above engine
 #include"Timer.h"
 #include"Tile.h"
+#include"Level.h"
 #include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"
@@ -18,24 +19,24 @@
 int main(int argc, char **argv)
 {
 	Log::Open("game_log.log");
+
 	Engine engine;
-	int seedAnim=0;
+
+	int seedAnim=0; //seed for our animation ;3
 	
 	engine.sdlinit("Engine");
-	engine.setupStage1();
-	//std::cout<<getTime()<<"[*]SDL INIT !\n";
 	Log::Info("SDL Init !");
-	//Player spawn coordinates for now
+    engine.level.loadLevel1();
+    //start timer
 	engine.timer.start();
 	Log::Info("FPS Capped at %d ",FRAME_PER_SECOND);
-	engine.loadLevel1();
+
 	while(1)
 	{
 		++seedAnim;
 		if(seedAnim >= 4)
 			seedAnim=1;
         //Add loadlevel , update and some more here.
-        engine.loadLevel1();
 
         engine.handleinput(seedAnim);
 

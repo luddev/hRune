@@ -3,8 +3,6 @@
 #ifndef _GRAPHIC_H
 #define _GRAPHIC_H
 
-#define TOTAL_TILE_LEVEL_1 80
-
 const int TILE_RED = 0;
 const int TILE_GREEN = 1;
 const int TILE_BLUE = 2;
@@ -28,6 +26,7 @@ public:
 	void setAlpha(SDL_Texture *texture, Uint8 alpha);
 	void flipTexture(SDL_Texture* texture, const SDL_Rect *player,const SDL_Rect *box, double angle);
 	void loadSprites();
+    void setClip();
 	
 
 	SDL_Window* window;

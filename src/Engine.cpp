@@ -7,6 +7,7 @@
 //User Includes
 #include"Tile.h"
 #include"Timer.h"
+#include"Level.h"
 #include"Graphic.h"
 #include"Log.h"
 #include"Character.h"
@@ -14,15 +15,14 @@
 
 
 
-
-
 Graphic Engine::gfx = Graphic();
 Timer Engine::timer = Timer();
 Character Engine::player = Character(320,240);
+Level Engine::level = Level();
 
 Engine::Engine()
 {
-	loadedtiles = false;
+
 }
 
 
@@ -57,13 +57,14 @@ void Engine::sdlinit(std::string title)
 	
 	Log::Info("Renderer Init !");
 
-}
+    //Might as well split this into  2 function or w/e
+
+    gfx.loadSprites();  //Load Sprite Sheets
+    Log::Info("Sprite Sheet Loaded");
+    SDL_RenderClear(gfx.renderer);  //Clean Renderer
 
 
-
-void Engine::setupStage1()
-{
-    //View Port Code , is this thing more like camera.
+        //View Port Code , is this thing more like camera.
     // find more about this.
     /*
 	SDL_Rect topLeftViewport;
@@ -75,61 +76,11 @@ void Engine::setupStage1()
 	SDL_RenderSetScale( gfx.renderer, 1.f, 1.f );
 	SDL_SetRenderDrawColor( gfx.renderer, 0xFF, 0xFF, 0xFF, 0xFF );
 	*/
-    SDL_RenderClear(gfx.renderer);
-	gfx.loadSprites();  //Load Sprite Sheets
-	gfx.renderScene();  //Render Scene
-	Log::Info("Clipping done");
-	
-	
-	//gfx.renderScene();
 
 }
 
-void Engine::setupStage2()
-{
 
 
-}
-
-void Engine::loadLevel1()
-{
-	int i=0;
-	//std::ifstream ;
-
-	//Load Tile Sprite
-
-
-	if(!loadedtiles)
-	{
-	//Level 1 texture at pos code in here ;)
-	int ycord = 0;
-	int xcord = 0;
-	//load tile sheets
-	for (i =0 ; i < TOTAL_TILE_LEVEL_1 ; i++)
-	{
-		
-		
-		tiles[i] = new Tile(xcord,ycord,TILE_RED);
-		Log::Info("Placing Tiles ( %d , %d )",xcord,ycord);
-        // take xcord increment it with size of tile , keeping ycord constant
-        //if xcord >= width of screen , increment y 
-		xcord += TILE_WIDTH;
-		if(xcord >= SCREEN_WIDTH)
-		{
-			xcord = 0;
-			ycord += TILE_HEIGHT;
-		}
-
-		
-	
-		
-	}
-	Log::Info("Tile Init !\n");
-	loadedtiles = true;
-	//Place tile sheets
-	}
-
-}
 
 void Engine::handleinput(int seedAnim)
 {
@@ -171,7 +122,7 @@ void Engine::handleinput(int seedAnim)
 		}
 		else if(event.type == SDL_QUIT)
         {
-		    destroyTiles();
+            level.destroyTiles();
             Quit();
 		}
         else
@@ -191,8 +142,8 @@ void Engine::update()
     int i = 0;
 	for (i=0 ; i < TOTAL_TILE_LEVEL_1 ; i++)
 	{
-		box = tiles[i]->getBox();
-		gfx.tileAtPos(gfx.tilesheet,&box,tiles[i]->getType());
+		box = level.tiles[i]->getBox();
+		gfx.tileAtPos(gfx.tilesheet,&box,level.tiles[i]->getType());
 	}
     box = player.getBox();
     animbox = player.getAnimBox();
@@ -209,18 +160,6 @@ void Engine::update()
 }
 
 
-void Engine::destroyTiles()
-{
-	int i=0;
-	for(i=0;i<TOTAL_TILE_LEVEL_1;i++)
-	{
-		delete tiles[i];
-	}
-	Log::Info("Tiles Deleted !\n");
-	
-
-}
-
 void Engine::Quit()
 {
     //Destroy Window
@@ -229,6 +168,7 @@ void Engine::Quit()
 	SDL_DestroyRenderer(gfx.renderer);
 	IMG_Quit();
 	SDL_Quit();
+    Log::Info("QUIT ");
 	Log::Close();
 	exit(0);
 }

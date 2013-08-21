@@ -6,6 +6,7 @@
 //User Includes
 #include"Tile.h"
 #include"Timer.h"
+#include"Level.h"
 #include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"
@@ -74,7 +75,7 @@ void Graphic::tileAtPos(SDL_Texture *texture,const SDL_Rect *box, int type)
 
 }
 
-void setClip(Graphic *gfx)
+void Graphic::setClip()
 {
 	//RED TILE
 	clip[TILE_RED].x = 0;
@@ -91,19 +92,13 @@ void setClip(Graphic *gfx)
 	clip[TILE_BLUE].y = 160;
 	clip[TILE_BLUE].w = TILE_WIDTH;
 	clip[TILE_BLUE].h = TILE_HEIGHT;
-	
-	//Load Tile Sheet
+    Log::Info("Clipping done");
 
-	
 }
 
 void Graphic::renderScene()
 {
-
-
-	setClip(this);
 	//Add Rendering Code Here.
-	//textureAtPos(tex,40,40,clip[0]);
 	//Render :) Pew pew pew!
 	SDL_RenderPresent(renderer);
 	SDL_RenderClear(renderer);
@@ -137,4 +132,6 @@ void Graphic::loadSprites()
 	tilesheet = loadImage("../res/tiles.png");
     player = loadImage("../res/player_t.png");
 
+    //Set Tiles Clip from sprite Sheet
+    setClip();
 }
