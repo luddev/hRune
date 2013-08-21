@@ -3,32 +3,34 @@
 #ifndef _ENGINE_H
 #define _ENGINE_H
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-
 
 class Engine
 {
 public:
 
+	Engine();
+
 	void sdlinit(std::string title);
 	static void Quit();
-	void gamelogic();
-	void setupStageProps();
-	void removeStageProps();
+
 	void setupStage1();
 	void setupStage2();
-	void loadLevel1(Tile *tilex[]);
-	void destroyTiles(Tile *tilex[]);
-
-	Engine();
+	void loadLevel1();
+	void destroyTiles();
+    void update();
+    void handleinput(int seedAnim);
+	
 	//Variables
 	static Graphic gfx;
 	static Timer timer;
+    static Character player;
+    Tile *tiles[TOTAL_TILE_LEVEL_1];
 private:
-	bool loadedTiles;
+	bool loadedtiles;
+    SDL_Event event;
 
 };
+
 
 
 

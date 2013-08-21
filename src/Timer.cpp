@@ -2,6 +2,7 @@
 #include"SDL.h"
 #include"Timer.h"
 #include"Log.h"
+//#include"Stdincl.h"
 
 Timer::Timer()
 {

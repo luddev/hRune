@@ -4,27 +4,25 @@
 #include"SDL_image.h"
 #include"Tile.h"
 #include"Timer.h"
+#include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"
-#include"Character.h"
 #include"Log.h"
+//#include"Stdincl.h"
 
-
-Character::Character(Engine *eng, int x, int y)
+Character::Character(int x, int y)
 {
-	engine = eng; 
 	box.x = x;
 	box.y = y;
 	box.w = TILE_WIDTH;
 	box.h = TILE_HEIGHT;
 
-	xVel = 5;
-	yVel = 0;
+	speedX = 5;
+    speedY = 0;
 	friction = 0.6;
-	xAcl = 5;
-	yAcl = 0;
+	acclX = 5;
+	acclY = 0;
 
-	player = eng->gfx.loadImage("../res/player_t.png");
 	play_t.x = CHARACTER_STAND_X;
 	play_t.y = CHARACTER_STAND_Y;
 	play_t.w = CHARACTER_W;
@@ -32,103 +30,115 @@ Character::Character(Engine *eng, int x, int y)
 	degree = 0;
 	isFlip = false;
 
-	eng->gfx.textureAtPos(player, box.x, box.y , &play_t);
 	Log::Info("Character Init! \n");
-	//eng->gfx.setAlpha(player, 0);
-	//eng->gfx.setBlendMode(player,belndin); Setup blending later
-	eng->gfx.renderScene();
+
 
 	
 }
 
-Character::~Character()
+void Character::setSpeedX(int speedx)
 {
-	SDL_DestroyTexture(player);
+    speedX = speedx;
+}
+void Character::setSpeedY(int speedy)
+{
+    speedY = speedy;
+}
+void Character::setAcclX(int acclx)
+{
+    acclX = acclx;
+}
+void Character::setAcclY(int accly)
+{
+    acclY = accly;
+}
+void Character::setFlip(bool isflip)
+{
+    isFlip = isflip;
+}
+void Character::setBox(SDL_Rect player)
+{
+    box.x = player.x;
+    box.y = player.y;
+    box.w = player.w;
+    box.h = player.h;
 }
 
-void Character::handleInput(int i, Tile *tilex[])
+int Character::getSpeedX()
 {
-
-	if(SDL_PollEvent(&event))
-	{
-		if(event.type == SDL_KEYDOWN)
-		{
-			switch(event.key.keysym.sym)
-			{
-				case SDLK_w:
-
-					break;
-				case SDLK_s:
-
-					break;
-				case SDLK_d:
-					play_t.x = CHARACTER_RUN_X * i;
-					play_t.y = CHARACTER_RUN_Y;
-					xVel += xAcl;
-					//yVel -= yAcl;
-					isFlip = false;
-					break;
-				case SDLK_a:
-					play_t.x = CHARACTER_RUN_X * i;
-					play_t.y = CHARACTER_RUN_Y;
-					xVel -= xAcl;
-					//yVel += yAcl;
-					isFlip = true;
-					break;
-				case SDLK_SPACE:
-					if(isFlip == false)
-					{
-						play_t.x = CHARACTER_JUMP_X;
-						play_t.y = CHARACTER_JUMP_Y;
-						xVel += xAcl;
-						yVel += 5;
-						break;
-					}
-					else 
-					{
-						play_t.x = CHARACTER_JUMP_X;
-						play_t.y = CHARACTER_JUMP_Y;
-						xVel -= xAcl;
-						yVel -= 5;
-						break;
-					}
-				case SDLK_p:
-					if(!engine->timer.paused())
-					{
-						engine->timer.pause();
-					}
-					else
-					{
-						engine->timer.unpause();
-					}
-						break;
-			}
-
-		}
-		else if(event.type == SDL_QUIT)
-		{
-			engine->destroyTiles(tilex);
-			engine->Quit();
-		}
-		else
-		{
-			//play_t.x = CHARACTER_STAND_X;
-			//play_t.y = CHARACTER_STAND_Y;
-			 // Too much friction can't move fix this.
-			xVel = xVel * friction;
-			yVel = yVel * friction;
-		}
-		
-		
-		box.x += xVel;
-		box.y += yVel;
-		showHero(); //Render Hero On Screen
-
-		
-	}
-
+    return speedX;
+}
+int Character::getSpeedY()
+{
+    return speedY;
+}
+int Character::getAcclX()
+{
+    return acclX;
+}
+int Character::getAcclY()
+{
+    return acclY;
+}
+bool Character::getFlip()
+{
+    return isFlip;
+}
+SDL_Rect Character::getBox()
+{
+    return box;
+}
+SDL_Rect Character::getAnimBox()
+{
+    return play_t;
 }
 
+
+void Character::animatePlayer(int status, int seedAnim, int keypressed)
+{
+    if(status == CHARACTER_STAND)
+    {
+        speedX = 0;
+        speedY = 0;
+    }
+   	else if(status == CHARACTER_RUN && keypressed == SDLK_d)
+    {
+        play_t.x = CHARACTER_RUN_X * seedAnim;
+	    play_t.y = CHARACTER_RUN_Y;
+	    speedX += acclX;
+	    //yVel -= yAcl;
+	    isFlip = false;
+    }
+    else if(status == CHARACTER_RUN && keypressed == SDLK_a)
+    {
+        play_t.x = CHARACTER_RUN_X * seedAnim;
+		play_t.y = CHARACTER_RUN_Y;
+		speedX -= acclX;
+		//yVel += yAcl;
+		isFlip = true;
+    }
+	else if(status == CHARACTER_JUMP && keypressed == SDLK_SPACE)
+    {
+        if(isFlip == false)
+        {
+		    play_t.x = CHARACTER_JUMP_X;
+		    play_t.y = CHARACTER_JUMP_Y;
+		    speedX += acclX;
+		    speedY += 5;
+	    }
+	    else 
+	    {
+		    play_t.x = CHARACTER_JUMP_X;
+		    play_t.y = CHARACTER_JUMP_Y;
+		    speedX -= acclX;
+		    speedY -= 5;
+	    }
+    }
+    box.x += speedX;
+    box.y += speedY;
+}
+
+/*
 void Character::showHero()
 {
 	if(isFlip == false)
@@ -142,3 +152,4 @@ void Character::showHero()
 	}
 	engine->gfx.renderScene();
 }
+*/

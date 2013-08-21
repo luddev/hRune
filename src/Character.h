@@ -18,27 +18,43 @@ const int CHARACTER_RUN_Y = 79;		//Character Y coordinate in sprite Action : RUN
 const int CHARACTER_JUMP_X = 255;
 const int CHARACTER_JUMP_Y = 0;
 
+typedef enum {
+    CHARACTER_STAND = 0,
+    CHARACTER_RUN,
+    CHARACTER_JUMP,
+    CHARACTER_DIE
+} characterStatus;
+
 class Character
 {
 public:
-	Character(Engine *eng, int x, int y);
-	void handleInput(int i, Tile *tilex[]);
-	void showHero();
-	void setCamera();
-	void checkCollision();
-	~Character();
+	Character(int x, int y);
 
+    SDL_Rect getBox();
+    int getSpeedX();
+    int getSpeedY();
+    int getAcclX();
+    int getAcclY();
+    bool getFlip();
+    SDL_Rect getAnimBox();
+
+    void setSpeedX(int speedx);
+    void setSpeedY(int speey);
+    void setAcclX(int acclx);
+    void setAcclY(int accly);
+    void setFlip(bool isflip);
+    void setBox(SDL_Rect player);
+
+    void animatePlayer(int status, int i, int keypressed);
 
 private:
 	SDL_Rect box;	//Character Position
 	SDL_Rect play_t;	//Character Coordinate in sprite
-	int xVel,yVel;
-	int xAcl,yAcl;
+	int speedX,speedY;
+	int acclX,acclY;
 	double degree;
 	float friction;
-	SDL_Event event;
-	SDL_Texture *player;
-	Engine *engine;
+	//SDL_Texture *player;
 	SDL_BlendMode blendin;
 	bool isFlip;
 };

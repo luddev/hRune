@@ -6,6 +6,7 @@ const int FRAME_PER_SECOND = 30;
 class Timer
 {
 public:
+	Timer();
 	void start();
 	void stop();
 
@@ -17,8 +18,6 @@ public:
 	int ticks() const;
 	bool started() const;
 	bool paused() const;
-
-	Timer();
 
 private:
     int startTicks, pausedTicks;

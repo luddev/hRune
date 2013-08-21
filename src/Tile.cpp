@@ -4,11 +4,11 @@
 #include"SDL_image.h"
 #include"Tile.h"
 #include"Timer.h"
+#include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"
-#include"Character.h"
 #include"Log.h"
-
+//#include"Stdincl.h"
 
 
 Tile::Tile( int x, int y, int tipe)

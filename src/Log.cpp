@@ -1,7 +1,7 @@
 /* ============================================================================
  * Name        : Log.cpp
  * Author(s)   : ludkiller, Dan "WildN00b" Printzell
- * Copyright   : FreeBSD
+ * Copyright   : GNU GPL V2
  * Description : Logging class
  * ============================================================================ */
 
@@ -27,6 +27,7 @@ char * getTime() {
 	return buf;
 }
 
+
 // Not using the constructor and deconstructor because the class is used in a statically way.
 Log::Log() {
 }
@@ -43,11 +44,18 @@ bool Log::Open(const char * file) {
 		Error("Failed to open '%s', disregards saving log file.", file);
 		return false;
 	}
+	strcpy(buf,"----------------------------------------------\n");
+	fprintf(fp,"\t_Logging Started_ %s \n",getTime());
+	fprintf(fp,buf);
 
 	return true;
 }
 
 void Log::Close() {
+	
+	fprintf(fp,"\t_Logging Stopped_ %s \n",getTime());
+	strcpy(buf,"----------------------------------------------\n");
+	fprintf(fp,buf);
 	if (fp) { // If fp isn't NULL
 		fclose(fp);
 		fp = NULL;

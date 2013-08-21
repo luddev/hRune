@@ -6,9 +6,11 @@
 //User Includes
 #include"Tile.h"
 #include"Timer.h"
+#include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"
 #include"Log.h"
+//#include"stdincl.h"
 
 SDL_Rect clip[3];
 
@@ -18,10 +20,10 @@ Graphic::Graphic()
 	window = nullptr;
 	renderer = nullptr;
 	
-	mWindow.w = SCREEN_WIDTH;
-	mWindow.h = SCREEN_HEIGHT;
-	mWindow.x = 20;
-	mWindow.y = 20;
+	mwindow.w = SCREEN_WIDTH;
+	mwindow.h = SCREEN_HEIGHT;
+	mwindow.x = 20;
+	mwindow.y = 20;
 	camera.x = 0;
 	camera.y = 0;
 	camera.w = SCREEN_WIDTH;
@@ -37,7 +39,7 @@ SDL_Texture* Graphic::loadImage(std::string file)
 	if(image == nullptr)
 	{
 		Log::Warning("Unable to locate image %s",file);
-		throw std::runtime_error("Unable to locate image " + file);
+		Engine::Quit();
 	}
 
 	texture = SDL_CreateTextureFromSurface(renderer,image);
@@ -45,7 +47,7 @@ SDL_Texture* Graphic::loadImage(std::string file)
 	{
 		Log::Warning("Failed Creating Texture From Surface \nError : %s",SDL_GetError());
 		//std::cout<<SDL_GetError()<<std::endl;
-		throw std::runtime_error("Failed Creating Texture from surface\n");
+		Engine::Quit();
 
 	}
 	SDL_FreeSurface(image);
@@ -124,13 +126,15 @@ void Graphic::setAlpha(SDL_Texture *texture, Uint8 alpha )
 	Log::Info("Alpha Blending\n");
 }
 
-void Graphic::flipTexture(SDL_Texture* texture, const SDL_Rect *player , const SDL_Rect *box, double angle)
+void Graphic::flipTexture(SDL_Texture* texture, const SDL_Rect *srcclip , const SDL_Rect *destbox, double angle)
 {
-	SDL_RenderCopyEx(renderer,texture,player,box,angle,NULL,SDL_FLIP_HORIZONTAL);
+	SDL_RenderCopyEx(renderer,texture,srcclip,destbox,angle,NULL,SDL_FLIP_HORIZONTAL);
 
 }
 
 void Graphic::loadSprites()
 {
 	tilesheet = loadImage("../res/tiles.png");
+    player = loadImage("../res/player_t.png");
+
 }

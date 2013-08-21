@@ -6,40 +6,48 @@
 //User Includes
 //Order of inclusion matters ;) please dont tweak with it
 //always keep Graphic above engine
-#include"Graphic.h"
-#include"Engine.h"
+#include"Timer.h"
 #include"Tile.h"
 #include"Character.h"
-
+#include"Graphic.h"
+#include"Engine.h"
+#include"Log.h"
+//#include"Stdincl.h"
 
 
 int main(int argc, char **argv)
 {
+	Log::Open("game_log.log");
 	Engine engine;
-	int i=0;
+	int seedAnim=0;
 	
-	try 
-	{
-		engine.sdlinit("Engine");
-		engine.setupStage1();
-		std::cout<<"[*]SDL INIT !\n";
-	}
-	catch (const std::runtime_error &e)
-	{
-		std::cout << e.what() << std::endl;
-		Engine::Quit();
-		return -1;
-	}
-	Character player(&engine,320,240);	//Player spawn coordinates for now
-	
+	engine.sdlinit("Engine");
+	engine.setupStage1();
+	//std::cout<<getTime()<<"[*]SDL INIT !\n";
+	Log::Info("SDL Init !");
+	//Player spawn coordinates for now
+	engine.timer.start();
+	Log::Info("FPS Capped at %d ",FRAME_PER_SECOND);
+	engine.loadLevel1();
 	while(1)
 	{
-	i++;
-	if(i >= 4)
-		i=1;
-	player.handleInput(i);
-	//engine.gfx.renderScene();
+		++seedAnim;
+		if(seedAnim >= 4)
+			seedAnim=1;
+        //Add loadlevel , update and some more here.
+        engine.loadLevel1();
 
+        engine.handleinput(seedAnim);
+
+        engine.update(); // let engine.update call renderscene
+
+       // engine.gfx.renderScene();
+
+		if(engine.timer.ticks() < (1000/ FRAME_PER_SECOND ))
+		{
+			SDL_Delay( ( 1000 / FRAME_PER_SECOND ) - engine.timer.ticks() );
+			Log::Info("FPS Capped at %d ",FRAME_PER_SECOND);
+		}
 	
 	}
 	SDL_Delay(2000);

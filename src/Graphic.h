@@ -11,11 +11,15 @@ const int TILE_BLUE = 2;
 const int TILE_WIDTH = 60;
 const int TILE_HEIGHT = 60;
 
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
+
 
 
 class Graphic
 {
 public:
+	Graphic();
 	SDL_Texture* loadImage(std::string file);
 	void textureAtPos(SDL_Texture* texture, int x, int y,const SDL_Rect *clip);
 	void tileAtPos(SDL_Texture *texture,const SDL_Rect *box, int type);
@@ -24,14 +28,17 @@ public:
 	void setAlpha(SDL_Texture *texture, Uint8 alpha);
 	void flipTexture(SDL_Texture* texture, const SDL_Rect *player,const SDL_Rect *box, double angle);
 	void loadSprites();
-	Graphic();
+	
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	//SDL_Surface *screenSurface; Old
-	SDL_Rect mWindow;
+	SDL_Rect mwindow;
 	SDL_Rect camera;
+
+    //Textures for Tile Sheet Required
 	SDL_Texture *tilesheet;
+    SDL_Texture *player;
 
 
 
