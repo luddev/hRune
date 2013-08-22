@@ -1,3 +1,4 @@
+/*
 //SDL Required
 #include"SDL.h"
 #include"SDL_image.h"
@@ -12,7 +13,8 @@
 #include"Log.h"
 #include"Character.h"
 #include"Engine.h"
-
+*/
+#include"Stdincl.h"
 
 
 Graphic Engine::gfx = Graphic();

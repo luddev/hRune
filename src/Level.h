@@ -6,6 +6,8 @@
 #define TOTAL_TILE_LEVEL_1 75
 const int TOTAL_TILES = 3;
 
+#include"Character.h"
+
 class Level
 {
 public:
@@ -15,7 +17,7 @@ public:
 	void setupStage2();
 
 	void loadLevel1();
-    void checkCollisionLevel1();
+    bool checkCollisionLevel1(Character *player);
 
 
     void destroyTiles();

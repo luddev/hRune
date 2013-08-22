@@ -1,8 +1,10 @@
+/*
 #include<iostream>
 #include"SDL.h"
 #include"Timer.h"
 #include"Log.h"
-//#include"Stdincl.h"
+*/
+#include"Stdincl.h"
 
 Timer::Timer()
 {

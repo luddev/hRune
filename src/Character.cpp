@@ -1,16 +1,19 @@
+/*
 #include<iostream>
 #include<string>
 #include"SDL.h"
 #include"SDL_image.h"
-#include"Tile.h"
-#include"Level.h"
-#include"Timer.h"
+
 #include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"
+#include"Level.h"
 #include"Log.h"
+#include"Tile.h"
+#include"Timer.h"
+*/
 
-//#include"Stdincl.h"
+#include"Stdincl.h"
 
 Character::Character(int x, int y)
 {
@@ -21,7 +24,7 @@ Character::Character(int x, int y)
 
 	speedX = 5;
     speedY = 0;
-	friction = 0.6;
+	friction = 0.83;    //Test Different values of friction :3
 	acclX = 5;
 	acclY = 0;
 
@@ -32,7 +35,7 @@ Character::Character(int x, int y)
 	degree = 0;
 	isFlip = false;
 
-	Log::Info("Character Init! \n");
+	Log::Info("Character Init!");
 
 
 	
@@ -98,12 +101,15 @@ SDL_Rect Character::getAnimBox()
 
 void Character::animatePlayer(int status, int seedAnim, int keypressed)
 {
+    
     if(status == CHARACTER_STAND)
     {
-        speedX = 0;
-        speedY = 0;
+        //play_t.x = CHARACTER_STAND_X;
+        //play_t.y = CHARACTER_STAND_Y;
+        speedX *= friction;
+        speedY *= friction;
     }
-   	else if(status == CHARACTER_RUN && keypressed == SDLK_d)
+   else if(status == CHARACTER_RUN && keypressed == SDLK_d)
     {
         play_t.x = CHARACTER_RUN_X * seedAnim;
 	    play_t.y = CHARACTER_RUN_Y;
@@ -125,6 +131,7 @@ void Character::animatePlayer(int status, int seedAnim, int keypressed)
         {
 		    play_t.x = CHARACTER_JUMP_X;
 		    play_t.y = CHARACTER_JUMP_Y;
+            speedX = 0;
 		    speedX += acclX;
 		    speedY += 5;
 	    }
@@ -132,10 +139,13 @@ void Character::animatePlayer(int status, int seedAnim, int keypressed)
 	    {
 		    play_t.x = CHARACTER_JUMP_X;
 		    play_t.y = CHARACTER_JUMP_Y;
+            speedX = 0;
 		    speedX -= acclX;
 		    speedY -= 5;
 	    }
     }
+    speedX *= friction;
+    speedY *= friction;
     box.x += speedX;
     box.y += speedY;
 }

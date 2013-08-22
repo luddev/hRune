@@ -1,3 +1,4 @@
+/*
 #include<iostream>
 #include<string>
 #include"SDL.h"
@@ -9,7 +10,8 @@
 #include"Graphic.h"
 #include"Engine.h"
 #include"Log.h"
-//#include"Stdincl.h"
+*/
+#include"Stdincl.h"
 
 
 Tile::Tile( int x, int y, int tipe)

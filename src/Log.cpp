@@ -4,13 +4,16 @@
  * Copyright   : GNU GPL V2
  * Description : Logging class
  * ============================================================================ */
-
+/*
 #include <stdio.h>
 #include "Log.h"
 #include <cstdio>
 #include <stdarg.h>
 #include <ctime>
 #include <cstring>
+*/
+
+#include"Stdincl.h"
 
 // The variables for the log class are stored here because the class is used in a statically way.
 static char buf[80];

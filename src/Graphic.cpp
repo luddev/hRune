@@ -1,17 +1,15 @@
+/*
 //SDL Required
 #include"SDL.h"
 #include"SDL_image.h"
 #include<iostream>
 #include<string>
 //User Includes
-#include"Tile.h"
-#include"Timer.h"
-#include"Level.h"
-#include"Character.h"
 #include"Graphic.h"
 #include"Engine.h"
 #include"Log.h"
-//#include"stdincl.h"
+*/
+#include"stdincl.h"
 
 SDL_Rect clip[3];
 

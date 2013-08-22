@@ -1,3 +1,4 @@
+/*
 #include<iostream>
 #include<fstream>
 #include"SDL.h"
@@ -5,10 +6,12 @@
 #include"Tile.h"
 #include"Log.h"
 #include"Level.h"
-#include"Timer.h"
 #include"Character.h"
+#include"Timer.h"
 #include"Graphic.h"
 #include"Engine.h"
+*/
+#include"Stdincl.h"
 
 Level::Level()
 {
@@ -79,9 +82,17 @@ void Level::loadLevel1()
 
 }
 
-void Level::checkCollisionLevel1()
+bool Level::checkCollisionLevel1(Character *player)
 {
     //Add Collision Checking Code here :3
+    int i = 0;
+    for(i = 0 ; i < TOTAL_TILE_LEVEL_1 ; i++)
+    {
+        if(!true)
+        {
+        return true;
+        }
+    }
 
 }
 

@@ -17,7 +17,7 @@
  */
 
 
-
+/*
 //SDL Required
 #include"SDL.h"
 #include"SDL_image.h"
@@ -33,8 +33,8 @@
 #include"Graphic.h"
 #include"Engine.h"
 #include"Log.h"
-//#include"Stdincl.h"
-
+*/
+#include"Stdincl.h"
 
 int main(int argc, char **argv)
 {
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 
         engine.handleinput(seedAnim);
 
-        engine.update(); // let engine.update call renderscene
+        engine.update(); // let engine.update call renderscene.
 
        // engine.gfx.renderScene();
 

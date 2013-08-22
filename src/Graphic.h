@@ -3,6 +3,13 @@
 #ifndef _GRAPHIC_H
 #define _GRAPHIC_H
 
+
+//User Includes
+#include"Tile.h"
+#include"Timer.h"
+#include"Level.h"
+#include"Character.h"
+
 const int TILE_RED = 0;
 const int TILE_GREEN = 1;
 const int TILE_BLUE = 2;

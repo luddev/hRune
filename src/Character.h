@@ -2,6 +2,7 @@
 #ifndef _CHARACTER_H
 #define _CHARACTER_H
 
+
 //Character width and height should remain constant 
 const int CHARACTER_W = 31;	//Character W in sprite Action : STAND , RUN
 const int CHARACTER_H = 33;	//Character H in sprite Action : STAND , RUN

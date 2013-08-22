@@ -11,10 +11,15 @@ public:
 	Engine();
 
 	void sdlinit(std::string title);
-	
-    void update();
+    /*
+     *  \brief Used to handle keyboard input.
+     *  \param seedAnim Seed for Animation.
+     *  \return void
+     */
     void handleinput(int seedAnim);
-	
+
+	void update();
+    
     static void Quit();
 
     //Variables
