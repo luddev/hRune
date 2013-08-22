@@ -147,6 +147,11 @@ void Engine::update()
 	}
     box = player.getBox();
     animbox = player.getAnimBox();
+    //Check For Collisiong Before placing player.
+
+
+
+    //Place Player On Screen.
     if(!player.getFlip())
     {
         

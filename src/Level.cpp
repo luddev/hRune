@@ -79,6 +79,12 @@ void Level::loadLevel1()
 
 }
 
+void Level::checkCollisionLevel1()
+{
+    //Add Collision Checking Code here :3
+
+}
+
 void Level::destroyTiles()
 {
 	int i=0;

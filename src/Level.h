@@ -3,7 +3,7 @@
 #ifndef _LEVEL_H
 #define _LEVEL_H
 
-#define TOTAL_TILE_LEVEL_1 64
+#define TOTAL_TILE_LEVEL_1 75
 const int TOTAL_TILES = 3;
 
 class Level
@@ -15,6 +15,8 @@ public:
 	void setupStage2();
 
 	void loadLevel1();
+    void checkCollisionLevel1();
+
 
     void destroyTiles();
 
